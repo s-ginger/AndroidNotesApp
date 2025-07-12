@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="67dp"
+    android:padding="17dp"
+    android:orientation="vertical"
+    android:id="@+id/register">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/textCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Отменить"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Сохранить"
+            android:textColor="#0277BD"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:hint=" s"
+        android:minHeight="48dp"
+        tools:ignore="HardcodedText,VisualLintTextFieldSize" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAutofill="no"
+        tools:ignore="UselessParent">
+
+        <EditText
+            android:id="@+id/noteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="|"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="10"
+            android:padding="10dp"
+            android:background="#00000000"
+            tools:ignore="Autofill,Hardcodedtext,TextContrastCheck,VisualLintTextFieldSize" />
+
+    </ScrollView>
+
+
+
+</LinearLayout>
