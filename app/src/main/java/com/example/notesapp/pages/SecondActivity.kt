@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.notesapp.R
-import com.example.notesapp.data.InMemoryNotesSource
+import com.example.notesapp.data.InSqlNotesSource
 import com.example.notesapp.databinding.ActivitySecondBinding
 import com.example.notesapp.models.Note
 import com.example.notesapp.repo.NotesRepo
@@ -23,7 +23,7 @@ class SecondActivity : AppCompatActivity() {
     private val binding
         get() = _binding ?:  throw IllegalStateException("binding second is null")
 
-    val repo = NotesRepo(InMemoryNotesSource())
+    val repo = NotesRepo(InSqlNotesSource(this))
 
     val viewModel: NotesViewModel by viewModels {
         NotesViewModelFactory(repo)
