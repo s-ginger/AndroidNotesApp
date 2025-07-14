@@ -2,7 +2,6 @@ package com.example.notesapp.pages
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +34,19 @@ class SecondActivity : AppCompatActivity() {
         enableEdgeToEdge()
         _binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val titleNote = intent.getStringExtra("noteTitle")
+        val textNote = intent.getStringExtra("noteText")
+
+        titleNote?.let {
+            textNote?.let {
+                val note = Note(Name = titleNote, Text =  textNote)
+                viewModel.addNote(note)
+            }
+            val note = Note(Name = titleNote, Text = "")
+            viewModel.addNote(note)
+        }
+
         viewModel.loadNotes()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.second) { v, insets ->
@@ -43,12 +55,6 @@ class SecondActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel.addNote(Note(Name = "Сьесть кота", Text =  "Вкусно😊"))
-        viewModel.notes.observe(this) { notes ->
-            notes.forEach {
-                Log.i("NoteSaved", it.toString())
-            }
-        }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
