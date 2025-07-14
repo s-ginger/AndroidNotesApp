@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 Log.i("Saved", user.toString())
                 val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                intent.putExtra("openFragment", "notes")
                 startActivity(intent)
             }
         }
