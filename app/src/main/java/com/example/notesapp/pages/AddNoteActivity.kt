@@ -29,12 +29,14 @@ class AddNoteActivity : AppCompatActivity() {
         with(binding) {
             val intent = Intent(this@AddNoteActivity, SecondActivity::class.java)
             textCancel.setOnClickListener {
+                intent.putExtra("openFragment", "notes")
                 startActivity(intent)
             }
 
             textSave.setOnClickListener {
-                intent.putExtra("noteTitle", noteEditTitle.text)
-                intent.putExtra("noteText", noteEditText.text)
+                intent.putExtra("noteTitle", noteEditTitle.text.toString())
+                intent.putExtra("noteText", noteEditText.text.toString())
+                intent.putExtra("openFragment", "notes")
                 startActivity(intent)
             }
 

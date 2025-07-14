@@ -34,20 +34,18 @@ class SecondActivity : AppCompatActivity() {
         enableEdgeToEdge()
         _binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.loadNotes()
 
         val titleNote = intent.getStringExtra("noteTitle")
         val textNote = intent.getStringExtra("noteText")
 
-        titleNote?.let {
-            textNote?.let {
-                val note = Note(Name = titleNote, Text =  textNote)
-                viewModel.addNote(note)
-            }
-            val note = Note(Name = titleNote, Text = "")
+
+        if (!titleNote.isNullOrBlank() && !textNote.isNullOrBlank()) {
+            val note = Note(Name = titleNote, Text = textNote)
             viewModel.addNote(note)
         }
 
-        viewModel.loadNotes()
+
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.second) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -55,6 +53,10 @@ class SecondActivity : AppCompatActivity() {
             insets
         }
 
+        val openFragmentFromIntent = intent.getStringExtra("openFragment")
+        openFragmentFromIntent?.let {
+            openFragment(NotesFragment())
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -64,7 +66,7 @@ class SecondActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_addNote-> {
-                    intent = Intent(this@SecondActivity, AddNoteActivity::class.java)
+                    val intent = Intent(this@SecondActivity, AddNoteActivity::class.java)
                     startActivity(intent)
                     true
                 }
