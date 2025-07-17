@@ -10,7 +10,7 @@ class NotesRepo(private val notesSource: NotesSource) {
     }
 
     fun updateNote(note: Note) {
-        notesSource.addNote(note)
+        notesSource.updateNote(note)
     }
 
     fun deleteNote(id: String) {

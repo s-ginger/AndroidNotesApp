@@ -47,17 +47,19 @@ class SecondActivity : AppCompatActivity() {
         } else {
             intent.getParcelableExtra<Note>("note")
         }
+        val isUpdate = intent.getBooleanExtra("isUpdate", false)
 
-        if (titleNote != null && textNote != null) {
+
+        if (isUpdate && note != null) {
+            Log.i("UpdatedNote", note.Name)
+            Log.i("UpdateNote", "Updating: ${note.id}, ${note.Name}")
+            viewModel.updateNote(note)
+        } else if (titleNote != null && textNote != null) {
             Log.i("newNote", titleNote)
             val note = Note(Name = titleNote, Text = textNote)
             viewModel.addNote(note)
         }
 
-        if (note != null) {
-            Log.i("UpdatedNote", note.Name)
-            viewModel.updateNote(note)
-        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.second) { v, insets ->

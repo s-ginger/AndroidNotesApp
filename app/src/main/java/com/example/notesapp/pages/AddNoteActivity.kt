@@ -58,10 +58,13 @@ class AddNoteActivity : AppCompatActivity() {
                     )
                     intent.putExtra("openFragment", "notes")
                     intent.putExtra("note", newNote)
+                    intent.putExtra("isUpdate", true)
+                    Log.d("NOTE_ID", newNote.id.toString())
                 } else {
                     intent.putExtra("noteTitle", noteEditTitle.text.toString())
                     intent.putExtra("noteText", noteEditText.text.toString())
                     intent.putExtra("openFragment", "notes")
+                    intent.putExtra("isUpdate", false)
                 }
                 startActivity(intent)
             }
