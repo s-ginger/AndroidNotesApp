@@ -33,7 +33,9 @@ class NotesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = NotesAdapter(emptyList())
+        adapter = NotesAdapter(emptyList()) { id ->
+            viewModel.deleteNote(id = id)
+        }
         binding.notesRecyclerView.adapter = adapter
 
         viewModel.notes.observe(viewLifecycleOwner) { notes ->
