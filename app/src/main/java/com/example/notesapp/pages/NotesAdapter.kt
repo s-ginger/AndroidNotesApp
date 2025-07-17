@@ -1,6 +1,7 @@
 package com.example.notesapp.pages
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import com.example.notesapp.R
 import android.view.View
@@ -58,33 +59,31 @@ class NotesAdapter(
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newNotes: List<Note>) {
-        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(
-            NotesDiffCallback(notes, newNotes)
-        )
         notes = newNotes
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
 }
 
-class NotesDiffCallback(
-    private val oldList: List<Note>,
-    private val newList: List<Note>
-) : androidx.recyclerview.widget.DiffUtil.Callback() {
-
-    override fun getOldListSize(): Int = oldList.size
-    override fun getNewListSize(): Int = newList.size
-
-    override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean {
-        return oldList[oldPos].id == newList[newPos].id
-    }
-
-    override fun areContentsTheSame(oldPos: Int, newPos: Int): Boolean {
-        return oldList[oldPos] == newList[newPos]
-    }
-}
-
-
-
+//class NotesDiffCallback(
+//    private val oldList: List<Note>,
+//    private val newList: List<Note>
+//) : androidx.recyclerview.widget.DiffUtil.Callback() {
+//
+//    override fun getOldListSize(): Int = oldList.size
+//    override fun getNewListSize(): Int = newList.size
+//
+//    override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean {
+//        return oldList[oldPos].id == newList[newPos].id
+//    }
+//
+//    override fun areContentsTheSame(oldPos: Int, newPos: Int): Boolean {
+//        return oldList[oldPos] == newList[newPos]
+//    }
+//}
+//
+//
+//
 

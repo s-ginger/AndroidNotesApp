@@ -3,6 +3,7 @@ package com.example.notesapp.pages
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.notesapp.databinding.ActivityNewnoteBinding
 import com.example.notesapp.models.Note
 
-@Suppress("DEPRECATION")
+
 class AddNoteActivity : AppCompatActivity() {
 
     private var _binding: ActivityNewnoteBinding? = null
@@ -23,6 +24,7 @@ class AddNoteActivity : AppCompatActivity() {
         _binding = ActivityNewnoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        @Suppress("DEPRECATION")
         val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("note", Note::class.java)
         } else {
@@ -30,6 +32,7 @@ class AddNoteActivity : AppCompatActivity() {
         }
 
         if (note != null) {
+            Log.i("NoteToUpdated", note.Name)
             binding.noteEditTitle.setText(note.Name)
             binding.noteEditText.setText(note.Text)
         }
@@ -49,7 +52,12 @@ class AddNoteActivity : AppCompatActivity() {
 
             textSave.setOnClickListener {
                 if (note != null) {
-                    intent.putExtra("note", note)
+                    val newNote = note.copy(
+                        Name = noteEditTitle.text.toString(),
+                        Text = noteEditText.text.toString()
+                    )
+                    intent.putExtra("openFragment", "notes")
+                    intent.putExtra("note", newNote)
                 } else {
                     intent.putExtra("noteTitle", noteEditTitle.text.toString())
                     intent.putExtra("noteText", noteEditText.text.toString())

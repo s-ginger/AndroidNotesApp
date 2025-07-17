@@ -36,7 +36,8 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = NotesAdapter(emptyList(), { id ->
             viewModel.deleteNote(id = id)
-        }, { note ->
+        },
+        { note ->
             val intent = Intent(requireContext(), AddNoteActivity::class.java)
             intent.putExtra("note", note)
             startActivity(intent)
