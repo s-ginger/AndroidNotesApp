@@ -1,6 +1,7 @@
 package com.example.notesapp.pages
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -17,6 +18,7 @@ import com.example.notesapp.viewmodels.NotesViewModel
 import com.example.notesapp.viewmodels.NotesViewModelFactory
 
 
+@Suppress("DEPRECATION")
 class SecondActivity : AppCompatActivity() {
 
     private var _binding: ActivitySecondBinding? = null
@@ -38,13 +40,20 @@ class SecondActivity : AppCompatActivity() {
 
         val titleNote = intent.getStringExtra("noteTitle")
         val textNote = intent.getStringExtra("noteText")
+        val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("note", Note::class.java)
+        } else {
+            intent.getParcelableExtra<Note>("note")
+        }
 
-
-        if (!titleNote.isNullOrBlank() && !textNote.isNullOrBlank()) {
+        if (titleNote != null && textNote != null) {
             val note = Note(Name = titleNote, Text = textNote)
             viewModel.addNote(note)
         }
 
+        if (note != null) {
+            viewModel.updateNote(note)
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.second) { v, insets ->
@@ -54,6 +63,8 @@ class SecondActivity : AppCompatActivity() {
         }
 
         val openFragmentFromIntent = intent.getStringExtra("openFragment")
+
+
         openFragmentFromIntent?.let {
             openFragment(NotesFragment())
         }

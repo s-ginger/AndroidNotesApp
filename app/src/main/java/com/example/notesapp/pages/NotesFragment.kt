@@ -1,5 +1,6 @@
 package com.example.notesapp.pages
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,9 +34,14 @@ class NotesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = NotesAdapter(emptyList()) { id ->
+        adapter = NotesAdapter(emptyList(), { id ->
             viewModel.deleteNote(id = id)
-        }
+        }, { note ->
+            val intent = Intent(requireContext(), AddNoteActivity::class.java)
+            intent.putExtra("note", note)
+            startActivity(intent)
+        })
+
         binding.notesRecyclerView.adapter = adapter
 
         viewModel.notes.observe(viewLifecycleOwner) { notes ->

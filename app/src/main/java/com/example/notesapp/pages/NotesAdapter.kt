@@ -13,7 +13,8 @@ import androidx.appcompat.app.AlertDialog
 
 class NotesAdapter(
     private var notes: List<Note>,
-    private val onDeleteClick: (String) -> Unit
+    private val onDeleteClick: (String) -> Unit,
+    private val onNoteClick: (Note) -> Unit
 ) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,6 +35,10 @@ class NotesAdapter(
         val note = notes[position]
         holder.titleText.text = note.Name
         holder.contentText.text = note.Text
+
+        holder.titleText.setOnClickListener {
+            onNoteClick(note)
+        }
 
         holder.deleteBtn.setOnClickListener { view ->
             AlertDialog.Builder(view.context)
