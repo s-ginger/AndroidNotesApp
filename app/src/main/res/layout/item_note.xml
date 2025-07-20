@@ -47,7 +47,7 @@
         android:background="@null"
         android:contentDescription="Моя кнопка"
         android:src="@drawable/delete_24px"
-        tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+        tools:ignore="HardcodedText,TouchTargetSizeCheck,ImageContrastCheck" />
 
 
 

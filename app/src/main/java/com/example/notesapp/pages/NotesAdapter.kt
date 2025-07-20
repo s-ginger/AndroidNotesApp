@@ -41,6 +41,11 @@ class NotesAdapter(
             onNoteClick(note)
         }
 
+        holder.contentText.setOnClickListener {
+            onNoteClick(note)
+        }
+
+
         holder.deleteBtn.setOnClickListener { view ->
             AlertDialog.Builder(view.context)
                 .setTitle("Удалить заметку?")
