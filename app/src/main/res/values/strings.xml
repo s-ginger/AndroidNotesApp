@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">NotesApp</string>
+    <string name="app_name">Notify</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notes_title_placeholder">Название заметки</string>
+    <string name="notes_content_placeholder">Содержимое заметки</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отменить</string>
+
 </resources>

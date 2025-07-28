@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:text="Отменить"
+            android:text="@string/cancel"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="16sp"
-            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck" />
 
         <View
             android:layout_width="0dp"
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:text="Сохранить"
+            android:text="@string/save"
             android:textColor="#0277BD"
             android:textSize="16sp"
-            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -49,7 +49,7 @@
         android:importantForAutofill="no"
         android:inputType="text"
         android:id="@+id/noteEditTitle"
-        android:hint=" s"
+        android:hint="@string/notes_title_placeholder"
         android:minHeight="48dp"
         tools:ignore="HardcodedText,VisualLintTextFieldSize" />
 
@@ -64,12 +64,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:hint="|"
+            android:hint="@string/notes_content_placeholder"
             android:inputType="textMultiLine|textCapSentences"
             android:minLines="10"
             android:padding="10dp"
             android:background="#00000000"
-            tools:ignore="Autofill,Hardcodedtext,TextContrastCheck,VisualLintTextFieldSize" />
+            tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
 
     </ScrollView>
 
