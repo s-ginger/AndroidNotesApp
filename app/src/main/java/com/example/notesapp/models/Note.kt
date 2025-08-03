@@ -7,7 +7,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-sealed class Data
+sealed class Data : Parcelable
 
 
 @Parcelize
@@ -17,6 +17,12 @@ data class Note(
     val text: String,
     val createdAt: String = getCurrentDateTime()
 ) : Parcelable, Data()
+
+@Parcelize
+data class Update(
+    val note: Note
+) : Parcelable, Data()
+
 
 fun getCurrentDateTime(): String {
     val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())

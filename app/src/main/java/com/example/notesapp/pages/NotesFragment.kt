@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.notesapp.databinding.FragmentNotesBinding
+import com.example.notesapp.models.Update
 import com.example.notesapp.viewmodels.NotesViewModel
 import com.example.notesapp.viewmodels.NotesViewModelFactory
 
@@ -39,7 +40,8 @@ class NotesFragment : Fragment() {
         },
         { note ->
             val intent = Intent(requireContext(), AddNoteActivity::class.java)
-            intent.putExtra("note", note)
+            val updateNote = Update(note)
+            intent.putExtra("note", updateNote)
             startActivity(intent)
         })
 

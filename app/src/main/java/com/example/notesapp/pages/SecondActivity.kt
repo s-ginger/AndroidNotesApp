@@ -1,7 +1,6 @@
 package com.example.notesapp.pages
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -13,12 +12,13 @@ import androidx.fragment.app.Fragment
 import com.example.notesapp.R
 import com.example.notesapp.data.InSqlNotesSource
 import com.example.notesapp.databinding.ActivitySecondBinding
-import com.example.notesapp.models.Note
+import com.example.notesapp.utils.safeGetParcelable
 import com.example.notesapp.repo.NotesRepo
 import com.example.notesapp.viewmodels.NotesViewModel
 import com.example.notesapp.viewmodels.NotesViewModelFactory
-
-
+import com.example.notesapp.models.Data
+import com.example.notesapp.models.Update
+import com.example.notesapp.models.Note
 
 class SecondActivity : AppCompatActivity() {
 
@@ -39,27 +39,23 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel.loadNotes()
 
-        val titleNote = intent.getStringExtra("noteTitle")
-        val textNote = intent.getStringExtra("noteText")
-        @Suppress("DEPRECATION")
-        val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("note", Note::class.java)
-        } else {
-            intent.getParcelableExtra<Note>("note")
+
+        val data = intent.safeGetParcelable<Data>("note")
+
+        if (data != null) {
+            when (data) {
+                is Update -> {
+                    Log.i("UpdateNote", "updates")
+                    viewModel.updateNote(data.note)
+                }
+                is Note -> {
+                    Log.i("Note", "add")
+                    viewModel.addNote(data)
+                }
+            }
+            intent.removeExtra("note")
+            viewModel.loadNotes()
         }
-        val isUpdate = intent.getBooleanExtra("isUpdate", false)
-
-
-        if (isUpdate && note != null) {
-            Log.i("UpdatedNote", note.name)
-            Log.i("UpdateNote", "Updating: ${note.id}, ${note.name}")
-            viewModel.updateNote(note)
-        } else if (titleNote != null && textNote != null) {
-            Log.i("newNote", titleNote)
-            val note = Note(name = titleNote, text = textNote)
-            viewModel.addNote(note)
-        }
-
 
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.second) { v, insets ->
@@ -68,11 +64,7 @@ class SecondActivity : AppCompatActivity() {
             insets
         }
 
-        val openFragmentFromIntent = intent.getStringExtra("openFragment")
-
-        openFragmentFromIntent?.let {
-            openFragment(NotesFragment())
-        }
+        openFragment(NotesFragment())
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
