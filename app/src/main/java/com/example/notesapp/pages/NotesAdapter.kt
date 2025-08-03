@@ -34,8 +34,8 @@ class NotesAdapter(
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
-        holder.titleText.text = note.Name
-        holder.contentText.text = note.Text
+        holder.titleText.text = note.name
+        holder.contentText.text = note.text
 
         holder.titleText.setOnClickListener {
             onNoteClick(note)

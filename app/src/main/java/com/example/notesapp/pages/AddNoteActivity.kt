@@ -32,9 +32,9 @@ class AddNoteActivity : AppCompatActivity() {
         }
 
         if (note != null) {
-            Log.i("NoteToUpdated", note.Name)
-            binding.noteEditTitle.setText(note.Name)
-            binding.noteEditText.setText(note.Text)
+            Log.i("NoteToUpdated", note.name)
+            binding.noteEditTitle.setText(note.name)
+            binding.noteEditText.setText(note.text)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.register) { v, insets ->
@@ -53,8 +53,8 @@ class AddNoteActivity : AppCompatActivity() {
             textSave.setOnClickListener {
                 if (note != null) {
                     val newNote = note.copy(
-                        Name = noteEditTitle.text.toString(),
-                        Text = noteEditText.text.toString()
+                        name = noteEditTitle.text.toString(),
+                        text = noteEditText.text.toString()
                     )
                     intent.putExtra("openFragment", "notes")
                     intent.putExtra("note", newNote)

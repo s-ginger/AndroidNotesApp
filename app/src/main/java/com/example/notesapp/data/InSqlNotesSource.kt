@@ -30,8 +30,8 @@ class InSqlNotesSource(context: Context) :
         val db = writableDatabase
         val values = ContentValues().apply {
             put("id", note.id)
-            put("title", note.Name)
-            put("text", note.Text)
+            put("title", note.name)
+            put("text", note.text)
             put("createdAt", note.createdAt)
         }
         db.insert("notes", null, values)
@@ -50,8 +50,8 @@ class InSqlNotesSource(context: Context) :
     override fun updateNote(note: Note) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put("title", note.Name)
-            put("text", note.Text)
+            put("title", note.name)
+            put("text", note.text)
         }
 
         db.update(
@@ -77,8 +77,8 @@ class InSqlNotesSource(context: Context) :
                 result.add(
                     Note(
                         id = getString(getColumnIndexOrThrow("id")),
-                        Name = getString(getColumnIndexOrThrow("title")),
-                        Text = getString(getColumnIndexOrThrow("text")),
+                        name = getString(getColumnIndexOrThrow("title")),
+                        text = getString(getColumnIndexOrThrow("text")),
                         createdAt = getString(getColumnIndexOrThrow("createdAt"))
                     )
                 )

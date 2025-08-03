@@ -51,12 +51,12 @@ class SecondActivity : AppCompatActivity() {
 
 
         if (isUpdate && note != null) {
-            Log.i("UpdatedNote", note.Name)
-            Log.i("UpdateNote", "Updating: ${note.id}, ${note.Name}")
+            Log.i("UpdatedNote", note.name)
+            Log.i("UpdateNote", "Updating: ${note.id}, ${note.name}")
             viewModel.updateNote(note)
         } else if (titleNote != null && textNote != null) {
             Log.i("newNote", titleNote)
-            val note = Note(Name = titleNote, Text = textNote)
+            val note = Note(name = titleNote, text = textNote)
             viewModel.addNote(note)
         }
 

@@ -7,13 +7,16 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
+sealed class Data
+
+
 @Parcelize
 data class Note(
     val id: String = UUID.randomUUID().toString(),
-    val Name: String,
-    val Text: String,
+    val name: String,
+    val text: String,
     val createdAt: String = getCurrentDateTime()
-) : Parcelable
+) : Parcelable, Data()
 
 fun getCurrentDateTime(): String {
     val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
