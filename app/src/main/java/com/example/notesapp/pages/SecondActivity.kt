@@ -79,6 +79,8 @@ class SecondActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_Settings -> {
+                    viewModel.loadNotes()
+                    openFragment(SettingsFragment())
                     true
                 }
                 else -> false

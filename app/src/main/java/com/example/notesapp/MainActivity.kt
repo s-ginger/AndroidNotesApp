@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.notesapp.databinding.ActivityRegisterBinding
 import com.example.notesapp.models.User
 import com.example.notesapp.pages.SecondActivity
+import com.example.notesapp.utils.ThemeHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         get() = _binding ?: throw IllegalStateException("binding reg is null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         _binding = ActivityRegisterBinding.inflate(layoutInflater)
