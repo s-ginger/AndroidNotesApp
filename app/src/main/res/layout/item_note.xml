@@ -33,6 +33,7 @@
             android:text="Текст заметки"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
+            android:maxLines="1"
             tools:ignore="HardcodedText,TextContrastCheck" />
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.notesapp.utils
 
 import android.app.Activity
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.notesapp.R
 import androidx.core.content.edit
 
@@ -11,8 +12,14 @@ object ThemeHelper {
 
     fun applyTheme(activity: Activity) {
         when (getSavedTheme(activity)) {
-            "dark" -> activity.setTheme(R.style.AppDarkTheme)
-            "light" -> activity.setTheme(R.style.AppTheme)
+            "dark" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                activity.setTheme(R.style.AppDarkTheme)
+            }
+            "light" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                activity.setTheme(R.style.AppTheme)
+            }
         }
     }
 
