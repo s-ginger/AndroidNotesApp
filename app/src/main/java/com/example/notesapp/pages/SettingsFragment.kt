@@ -9,6 +9,7 @@ import com.example.notesapp.databinding.FragmentSettingsBinding
 import com.example.notesapp.utils.ThemeHelper
 import android.content.Intent
 import com.example.notesapp.MainActivity
+import com.example.notesapp.utils.UserHelper
 
 
 class SettingsFragment : Fragment() {
@@ -27,6 +28,10 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        UserHelper.user?.let {
+            binding.userNameText.text = it.Name
+        }
 
         val currentTheme = ThemeHelper.getSavedTheme(requireContext())
         binding.themeSwitch.isChecked = currentTheme == "dark"
