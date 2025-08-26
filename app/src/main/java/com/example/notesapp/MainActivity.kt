@@ -11,6 +11,7 @@ import com.example.notesapp.databinding.ActivityRegisterBinding
 import com.example.notesapp.models.User
 import com.example.notesapp.pages.SecondActivity
 import com.example.notesapp.utils.ThemeHelper
+import com.example.notesapp.utils.UserHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        UserHelper.init(this)
+
+        if (UserHelper.user != null) {
+            val intent = Intent(this@MainActivity, SecondActivity::class.java)
+            intent.putExtra("openFragment", "notes")
+            startActivity(intent)
+        }
+
         _binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                     editPassword.text.toString()
                     )
                 Log.i("Saved", user.toString())
+                UserHelper.user = user
                 val intent = Intent(this@MainActivity, SecondActivity::class.java)
                 intent.putExtra("openFragment", "notes")
                 startActivity(intent)
