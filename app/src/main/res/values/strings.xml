@@ -6,5 +6,8 @@
     <string name="notes_content_placeholder">Содержимое заметки</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отменить</string>
+    <string name="editName">Name</string>
+    <string name="editEmail">Email</string>
+    <string name="editPassword">Password</string>
 
 </resources>
